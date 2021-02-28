@@ -26,4 +26,26 @@ Contamos con una base de datos en el repositorio que también deberá ser descar
 
 
 #### Solución
-La solución la podemos encontrar en el repositorio en la rama solution.
+Para probar la solución tenemos que ejecutar redis en nuestro local
+
+```shell
+docker run --publish 6379:6379 -d redis
+```
+
+Instalar de nuevo todas las dependencias
+
+```shell
+pip install -r requirements.txt
+```
+
+Ejecutar migraciones en nuestra bbdd
+
+```shell
+python manage.py migrate
+```
+
+Y levantar el proceso de celery
+
+```shell
+celery -A bank.celery_app worker -l INFO
+```
